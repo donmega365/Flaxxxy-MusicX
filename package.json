@@ -1,0 +1,5 @@
+{"name":"flaxxymusic","version":"1.0.0","main":"electron-main.js","description":"FlaxxyMusic",
+"scripts":{"start":"electron .","dist":"electron-builder"},
+"dependencies":{"@capacitor/android":"^6.1.0","@capacitor/cli":"^6.1.0","@capacitor/core":"^6.1.0"},
+"devDependencies":{"electron":"^31.0.0","electron-builder":"^24.13.3"},
+"build":{"appId":"com.flaxxy.music","productName":"Flaxxy MusicX","files":["www/**","electron-main.js"],"win":{"target":"nsis"},"linux":{"target":"AppImage"},"mac":{"target":"dmg"}}}
