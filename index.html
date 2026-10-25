@@ -1,0 +1,154 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Flaxxy MusicX</title><link rel="manifest" href="manifest.json"><link rel="icon" href="logo.svg">
+<style>
+:root{--bg:#000;--card:#1a1a1a;--tx:#fff;--mu:#aaa;--ac:#ff2d87}
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}body{background:var(--bg);color:var(--tx);font:15px 'Segoe UI',system-ui,sans-serif;padding-bottom:140px}
+#glow{position:fixed;top:0;left:0;right:0;height:300px;background:linear-gradient(hsl(330,50%,22%),transparent);z-index:0;transition:.6s;pointer-events:none}
+header{display:flex;align-items:center;gap:12px;padding:12px 16px;position:sticky;top:0;z-index:5;background:#000a;backdrop-filter:blur(14px)}header img{width:30px}header b{flex:1;font-size:19px;letter-spacing:-.3px;background:linear-gradient(90deg,#ff2d87,#a78bfa);-webkit-background-clip:text;color:transparent}
+.av{width:34px;height:34px;border-radius:50%;background:#2e9e3f;display:grid;place-items:center;font-weight:700;cursor:pointer}.ic{font-size:20px;cursor:pointer}
+main{position:relative;z-index:1;padding:0 16px;max-width:900px;margin:auto}h2{margin:22px 0 10px;font-size:22px;font-weight:700}.gr{font-size:26px;margin:14px 0 4px}
+button{background:#262626;color:var(--tx);border:0;border-radius:20px;padding:9px 16px;font:inherit;cursor:pointer}button.p{background:#fff;color:#000;font-weight:600}
+.chips,.hs{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:6px 0}.ch{white-space:nowrap;background:#ffffff1f}.ch.on{background:#fff;color:#000}
+.cv{aspect-ratio:1;border-radius:8px}.s{color:var(--mu);font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.tx{flex:1;min-width:0}.tx>div:first-child{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sd{aspect-ratio:1;border-radius:8px;display:flex;align-items:flex-end;padding:8px;font-weight:600;font-size:13px;cursor:pointer;text-shadow:0 1px 6px #000}.sdg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.c{flex:0 0 140px;cursor:pointer}.c .cv{margin-bottom:6px}.n{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.r{display:flex;align-items:center;gap:12px;padding:7px 0;cursor:pointer}.r .cv{width:52px;flex:none}.ib{font-size:20px;padding:6px 10px;background:none;border-radius:50%}
+.qp{display:grid;grid-template-rows:repeat(4,auto);grid-auto-flow:column;grid-auto-columns:92%;gap:2px 14px;overflow-x:auto;scrollbar-width:none;scroll-snap-type:x mandatory}.qp>*{scroll-snap-align:start}
+#mini{position:fixed;left:8px;right:8px;bottom:62px;border-radius:12px;padding:8px 10px;display:flex;align-items:center;gap:10px;z-index:8;background:#1f2b2b;transition:.5s;cursor:pointer;overflow:hidden}#mini .cv{width:44px;flex:none}#bar{position:absolute;bottom:0;left:0;height:2px;background:#fff;width:0}
+nav{position:fixed;bottom:0;left:0;right:0;display:flex;background:#0c0c0c;border-top:1px solid #222;z-index:9;padding-bottom:4px}nav button{flex:1;background:none;border-radius:0;padding:8px 2px;font-size:11px;color:#bbb}nav button i{display:block;font-style:normal;font-size:22px}nav .on{color:#fff}
+#fpl{position:fixed;inset:0;background:#000;z-index:50;transform:translateY(100%);transition:.35s;padding:18px 24px;overflow:auto;text-align:center}#fpl.o{transform:none}
+.top{display:flex;justify-content:space-between;font-size:26px;cursor:pointer}.big{width:min(78vw,380px);margin:24px auto 18px;border-radius:14px;box-shadow:0 20px 60px #0009;aspect-ratio:1}
+#fpl h2{margin:6px 0 2px}#sk{width:100%;margin:22px 0 4px;accent-color:#fff}.tm{display:flex;justify-content:space-between;color:var(--mu);font-size:12px}
+.ctl{display:flex;justify-content:space-around;align-items:center;font-size:26px;margin:20px 0;cursor:pointer}button.big2{width:70px;height:70px;border-radius:50%;font-size:26px;padding:0}
+.sb{display:flex;align-items:center;gap:12px;background:#212121;border-radius:30px;padding:6px 16px;margin:8px 0}.sb input{flex:1;background:none;border:0;color:#fff;font:inherit;padding:10px 0;outline:0}
+.fab{position:fixed;right:18px;bottom:130px;z-index:7;background:#fff;color:#000;font-weight:700;border-radius:18px;padding:16px 22px;box-shadow:0 6px 24px #0008}
+.smp{height:calc(100vh - 230px);overflow-y:auto;scroll-snap-type:y mandatory;scrollbar-width:none}.sc{height:100%;scroll-snap-align:start;border-radius:18px;margin-bottom:12px;display:flex;align-items:flex-end;padding:24px}.sc h2{margin:0 0 4px;font-size:28px}
+.pc{background:#171717;border-radius:16px;padding:18px;margin:12px 0;border:1px solid #2a2a2a}.pc.cur{border-color:#fff}.pc.ult{background:linear-gradient(135deg,#3b1d5e,#7a1f4d)}.pc ul{margin:10px 0 14px 18px;color:#ccc;line-height:1.7}.bd{background:#fff;color:#000;border-radius:10px;padding:2px 8px;font-size:11px;font-weight:700;margin-left:8px}
+#bn{background:#1d1d1d;text-align:center;padding:10px;font-size:12px;color:var(--mu);margin-top:16px;border-radius:10px}
+input{background:#212121;border:0;color:#fff;padding:12px;border-radius:10px;width:100%;margin:5px 0;font:inherit}
+#ad{position:fixed;inset:0;background:#000e;display:none;place-items:center;z-index:70;text-align:center}#ad div{background:#222;padding:30px;border-radius:16px}
+.m{position:fixed;inset:0;background:#000b;display:none;place-items:center;z-index:60}.m>div{background:#1c1c1c;padding:20px;border-radius:18px;width:min(92%,380px);max-height:86vh;overflow:auto}
+</style></head><body>
+<div id="glow"></div>
+<header><img src="logo.svg"><b>Flaxxy MusicX</b><span class="ic" onclick="go('search')">🔍</span><div id="acc" class="av" onclick="authM()">👤</div></header>
+<main id="v"></main>
+<div id="mini" onclick="fp(1)"><div id="bar"></div><div class="cv" id="pc"></div><div class="tx"><div id="pt">Pick a song</div><div class="s" id="pa">Flaxxy MusicX</div></div><button class="ib" id="pp" onclick="event.stopPropagation();tg()">▶</button></div>
+<nav><button onclick="go('home')"><i>🏠</i>Home</button><button onclick="go('samples')"><i>⏩</i>Samples</button><button onclick="go('search')"><i>🔍</i>Search</button><button onclick="go('lib')"><i>🔖</i>Library</button><button onclick="go('plans')"><i>💎</i>Upgrade</button></nav>
+<div id="fpl"><div class="top"><span onclick="fp(0)">⌄</span><span onclick="more()">⋯</span></div><div class="cv big" id="fc"></div><h2 id="ft"></h2><div class="s" id="fa"></div><input type="range" id="sk" value="0" oninput="au.currentTime=this.value/100*au.duration"><div class="tm"><span id="tc">0:00</span><span id="td">0:00</span></div>
+<div class="ctl"><span onclick="fx('sh')">🔀</span><span onclick="pv(-1)">⏮</span><button class="p big2" id="fpp" onclick="tg()">▶</button><span onclick="pv(1)">⏭</span><span onclick="fx('rp')">🔁</span></div>
+<div class="ctl"><span id="fl" onclick="lk()">♡</span><span onclick="cur>=0&&dl(cur+1)">⬇</span><span onclick="fx('ly')">📝</span><span onclick="fx('sl')">😴</span></div></div>
+<div id="ad"><div><p class="s">Advertisement</p><h2>🎧 Go Pro — no ads!</h2><p id="adt">Ad ends in 5</p><br><button class="p" onclick="go('plans');adx()">See plans</button></div></div>
+<div class="m" id="m"><div id="mb"></div></div><audio id="au"></audio>
+<script>
+const $=s=>document.querySelector(s),au=$('#au');
+// ====== CONFIG: put your own keys here ======
+const CFG={spotifyClientId:'YOUR_SPOTIFY_CLIENT_ID',googleClientId:'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com',redirect:location.origin+location.pathname};
+const PLANS={free:{n:'Free',p:0,ads:1,dl:10,q:'128 kbps',f:['Listen with ads','10 song downloads','6 skips per session','Spotify & YT import']},
+pro:{n:'Pro',p:4.99,ads:0,dl:100,q:'256 kbps',f:['No ads','100 song download limit','256 kbps quality','Unlimited skips','Shuffle & repeat','Sleep timer','Lyrics','Custom themes']},
+ultimate:{n:'Ultimate',p:9.99,ads:0,dl:1e9,q:'320 kbps / lossless',f:['Everything in Pro','Unlimited downloads & playback','Lossless audio','Playback speed','Crossfade','Smart Mix from your history','Wrapped stats','Family plan (invite 5)','Early access & priority support']}};
+const N=['Neon Skyline','Midnight Drive','Golden Hour','Static Hearts','Ocean Eyes','Flux','Paper Moon','Velvet Rain','Solar Wind','Echo Park','Candy Pulse','Last Train'],A=['Nova Ray','Kito','Luma','Vera Sky','Aqua','Dex','Mira','Orion','Sol','Ember','Zuri','Kane'];
+const T=N.map((t,i)=>({id:i+1,t,a:A[i],u:`https://www.soundhelix.com/examples/mp3/SoundHelix-Song-${i+1}.mp3`}));
+let sk=0,sh=0,rp=0,Q=null,stm,S={plan:'free',user:null,dls:[],rec:[],ext:[],pls:[],...JSON.parse(localStorage.fx||'{}')},cur=-1,plays=0,tab='home',q='';
+const save=()=>localStorage.fx=JSON.stringify(S),P=()=>PLANS[S.plan];
+const hr=()=>new Date().getHours(),cv=t=>`background:linear-gradient(135deg,hsl(${t.id*31},75%,52%),hsl(${t.id*31+50},65%,22%))`;
+S.likes=S.likes||[];S.qs=S.qs||[];let lt='dl',mood='';
+const dots=t=>`<span class="ib" onclick="event.stopPropagation();mn(${t.id})">⋮</span>`;
+const row=t=>`<div class="r" onclick="play(${t.id-1})"><div class="cv" style="${cv(t)}"></div><div class="tx"><div>${t.t}</div><div class="s">${S.dls.includes(t.id)?'⬇ ':''}${t.a}</div></div>${dots(t)}</div>`;
+const card=t=>`<div class="c" onclick="play(${t.id-1})"><div class="cv" style="${cv(t)}"></div><div class="n">${t.t}</div><div class="s">${t.a}</div></div>`;
+const ext=e=>`<div class="r" onclick="play(${e.m})"><div class="cv" style="${cv({id:e.m+1})}"></div><div class="tx"><div>${e.t}</div><div class="s">${e.a} · ${e.src}</div></div></div>`;
+const ad=()=>P().ads?'<div id="bn">📢 Ad · Go Pro for ad-free music</div>':'';
+function go(x){tab=x;scrollTo(0,0);render()}
+function render(){$('#acc').textContent=S.user?S.user.name[0].toUpperCase():'👤';let h='';
+if(tab=='home'){const seen=S.rec.map(i=>T[i-1]),k=mood?mood.length+3:0;
+const sug=[...T].sort((a,b)=>k?((a.id*k)%12-(b.id*k)%12):((seen.some(x=>x.a==b.a)?1:0)-(seen.some(x=>x.a==a.a)?1:0)));
+h=`<div class="chips">${['Relax','Energize','Workout','Focus','Party','Romance'].map(m=>`<button class="ch ${mood==m?'on':''}" onclick="mood=mood=='${m}'?'':'${m}';render()">${m}</button>`).join('')}</div>
+<div class="gr">Good ${hr()<12?'morning':hr()<18?'afternoon':'evening'}${S.user?', '+S.user.name:''}</div>
+<h2>Speed dial</h2><div class="sdg">${sug.slice(0,6).map(t=>`<div class="sd" onclick="play(${t.id-1})" style="${cv(t)}">${t.t}</div>`).join('')}</div>`;
+if(S.rec.length)h+=`<h2>Listen again</h2><div class="hs">${[...new Set(S.rec)].slice(-8).reverse().map(i=>card(T[i-1])).join('')}</div>`;
+h+=`<h2>Quick picks</h2><div class="qp">${sug.slice(6).concat(sug.slice(0,2)).map(row).join('')}</div>`;
+if(S.ext.length)h+=`<h2>Recently on ${[...new Set(S.ext.map(e=>e.src))].join(' & ')}</h2>${S.ext.slice(0,12).map(ext).join('')}`;
+h+=`<h2>Trending now</h2>${[...T].reverse().map(row).join('')}${ad()}`}
+if(tab=='search'){h=`<div class="sb"><span onclick="go('home')">←</span><input id="qi" placeholder="Search songs, artists" value="${q}" oninput="q=this.value;sr()" onkeydown="if(event.key=='Enter')sv()"><span onclick="mic()">🎤</span></div><div id="sr">${q?res():rec()}</div>`}
+if(tab=='samples')h=`<div class="smp">${T.map(t=>`<div class="sc" style="${cv(t)}"><div><h2>${t.t}</h2><div class="s" style="color:#fffc">${t.a}</div><br><button class="p" onclick="play(${t.id-1})">▶ Play</button> <button onclick="lkId(${t.id});render()">${S.likes.includes(t.id)?'♥':'♡'} Like</button></div></div>`).join('')}</div>`;
+if(tab=='lib'){h=`<h1 style="font-size:32px;margin:14px 0">Library</h1><div class="chips">${[['dl','Downloads'],['pl','Playlists'],['so','Songs']].map(([k,n])=>`<button class="ch ${lt==k?'on':''}" onclick="lt='${k}';render()">${n}</button>`).join('')}</div>`;
+if(lt=='dl')h+=`<h2>Downloads <span class="s">${S.dls.length}/${P().dl>1e6?'∞':P().dl}</span></h2>`+(S.dls.map(i=>row(T[i-1])).join('')||'<p class="s">No downloads yet. Tap ⋮ on a song.</p>');
+if(lt=='pl'){h+=`<h2>Playlists</h2><div class="r" onclick="lt='so';render()"><div class="cv" style="background:linear-gradient(135deg,#ff2d87,#7c3aed);display:grid;place-items:center">♥</div><div class="tx"><div>Liked songs</div><div class="s">${S.likes.length} songs</div></div></div>`;
+S.pls.forEach(p=>h+=`<h2 style="font-size:17px">${p.name} <span class="s">· ${p.src}</span></h2>`+p.items.map(x=>ext({...x,src:p.src})).join(''));if(!S.pls.length)h+='<p class="s">Import from Spotify or YouTube Music with the + New button.</p>'}
+if(lt=='so')h+=`<h2>Liked songs</h2>`+(S.likes.map(i=>row(T[i-1])).join('')||'<p class="s">Tap ♡ in the player to like songs.</p>');
+h+=`${ad()}<button class="fab" onclick="newM()">＋ New</button>`}
+if(tab=='plans')h='<h2>Upgrade</h2>'+Object.entries(PLANS).map(([k,p])=>`<div class="pc ${S.plan==k?'cur':''} ${k=='ultimate'?'ult':''}"><h2 style="margin:0">${p.n}${k=='ultimate'?'<span class="bd">BEST VALUE</span>':''}</h2><div style="font-size:26px;font-weight:700;margin:6px 0">${p.p?'$'+p.p+'<span class="s">/mo USD</span>':'$0'}</div><div class="s">${p.q}</div><ul>${p.f.map(f=>`<li>${f}</li>`).join('')}</ul><button class="p" onclick="buy('${k}')">${S.plan==k?'Current plan':'Get '+p.n}</button></div>`).join('')+'<p class="s">Demo checkout. Add Stripe / Google Play Billing for real payments.</p>';
+$('#v').innerHTML=h;document.querySelectorAll('nav button').forEach((b,i)=>b.classList.toggle('on',['home','samples','search','lib','plans'][i]==tab))}
+const res=()=>T.filter(t=>(t.t+t.a).toLowerCase().includes(q.toLowerCase())).map(row).join('')||'<p class="s">No results</p>';
+const rec=()=>`<h2 style="font-size:18px">Recent searches</h2>`+(S.qs.map((x,i)=>`<div class="r" onclick="q=S.qs[${i}];render()"><span class="ic">🕘</span><div class="tx">${x}</div><span class="s">↖</span></div>`).join('')||'<p class="s">Nothing yet</p>');
+function sr(){$('#sr').innerHTML=q?res():rec()}function sv(){if(q&&!S.qs.includes(q)){S.qs.unshift(q);S.qs=S.qs.slice(0,8);save()}}
+function mic(){const R=window.webkitSpeechRecognition;if(!R)return alert('Voice search not supported here');const r=new R();r.onresult=e=>{q=e.results[0][0].transcript;sv();render()};r.start()}
+function lkId(id){S.likes.includes(id)?S.likes=S.likes.filter(x=>x!=id):S.likes.push(id);save()}function lk(){if(cur<0)return;lkId(cur+1);sync()}
+function mn(id){const t=T[id-1],d=S.dls.includes(id);modal(`<h2 style="margin:0">${t.t}</h2><p class="s">${t.a}</p><br><div style="display:grid;gap:8px"><button onclick="mc();play(${id-1})">▶ Play</button><button onclick="mc();${d?`rmdl(${id})`:`dl(${id})`}">${d?'🗑 Remove download':'⬇ Download'}</button><button onclick="lkId(${id});mc();render()">${S.likes.includes(id)?'♥ Unlike':'♡ Like'}</button></div>`)}
+async function rmdl(id){try{await(await caches.open('fx-dl')).delete(T[id-1].u)}catch(e){}S.dls=S.dls.filter(x=>x!=id);save();render()}
+function newM(){modal(`<h2 style="margin:0 0 10px">New</h2><div style="display:grid;gap:8px"><button onclick="spot()">🟢 Import from Spotify</button><button onclick="yt()">🔴 Import from YouTube Music</button><button onclick="mc()">Close</button></div>`)}
+function fp(o){if(o&&cur<0)return tg();$('#fpl').classList.toggle('o',!!o)}
+const fm=x=>isFinite(x)?Math.floor(x/60)+':'+String(Math.floor(x%60)).padStart(2,'0'):'0:00';
+function tick(){if(au.duration){$('#sk').value=au.currentTime/au.duration*100;$('#tc').textContent=fm(au.currentTime);$('#td').textContent=fm(au.duration)}}
+function sync(){if(cur<0)return;const t=T[cur];$('#ft').textContent=t.t;$('#fa').textContent=t.a;$('#fc').style.cssText=cv(t);$('#fl').textContent=S.likes.includes(t.id)?'♥':'♡';$('#mini').style.background=`hsl(${t.id*31},35%,17%)`;$('#glow').style.background=`linear-gradient(hsl(${t.id*31},50%,24%),transparent)`;$('#fpl').style.background=`linear-gradient(hsl(${t.id*31},45%,22%),#000 75%)`}
+async function play(i){if(P().ads&&++plays%3==0)await showAd();cur=i;const t=T[i];let u=t.u;try{const c=await caches.open('fx-dl'),r=await c.match(t.u);if(r)u=URL.createObjectURL(await r.blob())}catch(e){}
+au.src=u;au.volume=1;au.playbackRate=S.sp||1;au.play();$('#pt').textContent=t.t;sync();$('#pa').textContent=t.a;$('#pc').style.cssText=cv(t);$('#pp').textContent='⏸';S.rec.push(t.id);S.rec=S.rec.slice(-30);save();if(tab=='home')render()}
+function tg(){if(cur<0)return play(0);au.paused?au.play():au.pause()}
+function pv(d,auto){if(!auto&&S.plan=='free'&&++sk>6)return modal(`<h2>Skip limit reached</h2><p class="s">Free plan: 6 skips per session.</p><br><button class="p" onclick="mc();go('plans')">Go Pro</button>`);
+if(Q){const k=Q.indexOf(cur+1);return play(Q[(k+d+Q.length)%Q.length]-1)}play(sh&&d>0?Math.floor(Math.random()*T.length):(cur+d+T.length)%T.length)}
+au.onplay=()=>$('#pp').textContent=$('#fpp').textContent='⏸';au.onpause=()=>$('#pp').textContent=$('#fpp').textContent='▶';au.onended=()=>rp?play(cur):pv(1,1);au.ontimeupdate=()=>{tick();$('#bar').style.width=au.currentTime/au.duration*100+'%';const L=au.duration-au.currentTime;if(S.plan=='ultimate'&&S.cf&&L<3)au.volume=Math.max(0,L/3)};
+function showAd(){au.pause();return new Promise(r=>{let n=5;$('#ad').style.display='grid';window.adx=()=>{clearInterval(x);$('#ad').style.display='none';r()};const x=setInterval(()=>{$('#adt').textContent=n>0?'Ad ends in '+n--:'';if(n<-1)adx()},1000)})}
+async function dl(id){if(S.dls.includes(id))return;if(S.dls.length>=P().dl){return modal(`<h2>Download limit reached</h2><p class="s">${P().n} plan allows ${P().dl} songs.</p><br><button class="p" onclick="mc();go('plans')">Upgrade</button>`)}
+try{const c=await caches.open('fx-dl');await c.put(T[id-1].u,await fetch(T[id-1].u));S.dls.push(id);save();render()}catch(e){alert('Download failed (offline?)')}}
+function buy(k){if(k==S.plan)return;modal(`<h2>${PLANS[k].n} — $${PLANS[k].p}/mo</h2><p class="s">Demo payment, no real charge.</p><br><button class="p" onclick="S.plan='${k}';save();mc();render()">Confirm</button> <button onclick="mc()">Cancel</button>`)}
+function modal(h){$('#mb').innerHTML=h;$('#m').style.display='grid'}function mc(){$('#m').style.display='none'}
+function authM(){if(S.user)return modal(`<h2>${S.user.name}</h2><p class="s">${S.user.email} · ${P().n}</p><br><button onclick="S.user=null;save();mc();render()">Log out</button>`);
+modal(`<h2>Welcome to Flaxxy MusicX</h2><input id="n" placeholder="Name"><input id="e" placeholder="Email"><input id="p" type="password" placeholder="Password"><button class="p" onclick="reg()">Create account / Login</button><p class="s" style="margin:10px 0">or</p><button onclick="spot()">Login with Spotify</button> <button onclick="yt()">Login with YouTube Music</button>`)}
+function reg(){const e=$('#e').value;if(!e)return;S.user={name:$('#n').value||e.split('@')[0],email:e};save();mc();render()}
+
+// ====== Pro / Ultimate features ======
+const RK={free:0,pro:1,ultimate:2},TH={Neon:'#ff2d87',Ocean:'#22d3ee',Sunset:'#fb923c',Lime:'#a3e635'};
+function need(r){if(RK[S.plan]>=RK[r])return 1;modal(`<h2>🔒 ${PLANS[r].n} feature</h2><p class="s">Upgrade to unlock this.</p><br><button class="p" onclick="mc();go('plans')">See plans</button>`)}
+const L=r=>RK[S.plan]>=RK[r]?'':'🔒 ';
+function more(){modal(`<h2>More</h2><div style="display:grid;gap:8px">
+<button onclick="fx('sh')">${L('pro')}🔀 Shuffle: ${sh?'ON':'off'}</button><button onclick="fx('rp')">${L('pro')}🔁 Repeat song: ${rp?'ON':'off'}</button>
+<button onclick="fx('sl')">${L('pro')}😴 Sleep timer${stm?' (on)':''}</button><button onclick="fx('ly')">${L('pro')}📝 Lyrics</button><button onclick="fx('th')">${L('pro')}🎨 Theme</button>
+<button onclick="fx('sp')">${L('ultimate')}⚡ Speed: ${S.sp||1}x</button><button onclick="fx('cf')">${L('ultimate')}🌊 Crossfade: ${S.cf?'ON':'off'}</button>
+<button onclick="fx('mx')">${L('ultimate')}✨ Smart Mix</button><button onclick="fx('wr')">${L('ultimate')}📊 Wrapped stats</button><button onclick="fx('fa')">${L('ultimate')}👨‍👩‍👧 Family plan</button>
+<button onclick="mc()">Close</button></div>`)}
+function fx(k){const pro=['sh','rp','sl','ly','th'].includes(k);if(!need(pro?'pro':'ultimate'))return;
+if(k=='sh'){sh=!sh;Q=null;more()}
+if(k=='rp'){rp=!rp;more()}
+if(k=='sl')modal(`<h2>Sleep timer</h2>${[15,30,60].map(m=>`<button onclick="sleep(${m})">${m} min</button> `).join('')}<button onclick="sleep(0)">Off</button>`);
+if(k=='ly')modal(`<h2>${cur<0?'Play a song first':T[cur].t}</h2><p class="s" style="line-height:1.8">${cur<0?'':'♪ Lyrics for demo tracks are placeholders.<br>Connect a lyrics provider (Musixmatch / LRCLIB) to show real synced lyrics.'}</p>`);
+if(k=='th')modal(`<h2>Theme</h2>`+Object.entries(TH).map(([n,c])=>`<button style="background:${c}" onclick="S.th='${c}';save();theme();mc()">${n}</button> `).join(''));
+if(k=='sp'){const o=[1,1.25,1.5,2,.75],i=(o.indexOf(S.sp||1)+1)%o.length;S.sp=o[i];au.playbackRate=S.sp;save();more()}
+if(k=='cf'){S.cf=!S.cf;save();more()}
+if(k=='mx'){const c={};S.rec.forEach(i=>{const a=T[i-1].a;c[a]=(c[a]||0)+1});const top=Object.keys(c).sort((a,b)=>c[b]-c[a])[0];
+const ids=T.filter(t=>t.a==top).map(t=>t.id).concat(T.filter(t=>t.a!=top).sort(()=>Math.random()-.5).map(t=>t.id));Q=ids;mc();play(ids[0]-1)}
+if(k=='wr'){const c={};S.rec.forEach(i=>c[i]=(c[i]||0)+1);const top=Object.entries(c).sort((a,b)=>b[1]-a[1]).slice(0,3);
+modal(`<h2>📊 Your Wrapped</h2><p>Plays: ${S.rec.length}</p>${top.map(([i,n])=>`<p>${T[i-1].t} — ${n}×</p>`).join('')||'<p class="s">Listen to some songs first</p>'}`)}
+if(k=='fa'){S.fam=S.fam||[];modal(`<h2>Family (${S.fam.length}/5)</h2>${S.fam.map(e=>`<p class="s">${e}</p>`).join('')}<input id="fe" placeholder="Invite email"><button class="p" onclick="if(S.fam.length<5&&$('#fe').value){S.fam.push($('#fe').value);save();fx('fa')}">Invite</button><p class="s">Needs a backend to send real invites.</p>`)}}
+function sleep(m){clearTimeout(stm);stm=m?setTimeout(()=>{au.pause();stm=0},m*6e4):0;mc()}
+function theme(){document.documentElement.style.setProperty('--ac',S.th||'#ff2d87')}theme();
+// ====== Spotify (PKCE) ======
+const b64=b=>btoa(String.fromCharCode(...new Uint8Array(b))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=/g,'');
+async function spot(){const v=b64(crypto.getRandomValues(new Uint8Array(32)));localStorage.sv=v;const ch=b64(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(v)));
+location=`https://accounts.spotify.com/authorize?response_type=code&client_id=${CFG.spotifyClientId}&scope=user-read-recently-played playlist-read-private user-read-email&redirect_uri=${encodeURIComponent(CFG.redirect)}&code_challenge_method=S256&code_challenge=${ch}`}
+async function spotDone(code){const r=await(await fetch('https://accounts.spotify.com/api/token',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({client_id:CFG.spotifyClientId,grant_type:'authorization_code',code,redirect_uri:CFG.redirect,code_verifier:localStorage.sv})})).json();
+const H={Authorization:'Bearer '+r.access_token},me=await(await fetch('https://api.spotify.com/v1/me',{headers:H})).json();S.user=S.user||{name:me.display_name,email:me.email||'Spotify'};
+const rc=await(await fetch('https://api.spotify.com/v1/me/player/recently-played?limit=20',{headers:H})).json();
+S.ext=S.ext.filter(e=>e.src!='Spotify').concat((rc.items||[]).map((x,i)=>({t:x.track.name,a:x.track.artists[0].name,src:'Spotify',m:i%12})));
+const pl=await(await fetch('https://api.spotify.com/v1/me/playlists?limit=10',{headers:H})).json();
+for(const p of pl.items||[]){const tr=await(await fetch(p.tracks.href+'?limit=30',{headers:H})).json();S.pls=S.pls.filter(z=>z.id!=p.id);S.pls.push({id:p.id,name:p.name,src:'Spotify',items:(tr.items||[]).filter(i=>i.track).map((i,k)=>({t:i.track.name,a:i.track.artists[0].name,m:k%12}))})}save()}
+// ====== YouTube / YT Music (Google OAuth) ======
+function yt(){location=`https://accounts.google.com/o/oauth2/v2/auth?response_type=token&client_id=${CFG.googleClientId}&redirect_uri=${encodeURIComponent(CFG.redirect)}&scope=${encodeURIComponent('https://www.googleapis.com/auth/youtube.readonly profile email')}`}
+async function ytDone(tok){const H={Authorization:'Bearer '+tok},j=u=>fetch(u,{headers:H}).then(r=>r.json());
+const me=await j('https://www.googleapis.com/oauth2/v3/userinfo');S.user=S.user||{name:me.name,email:me.email};
+const lk=await j('https://www.googleapis.com/youtube/v3/videos?part=snippet&myRating=like&maxResults=20');
+S.ext=S.ext.filter(e=>e.src!='YT Music').concat((lk.items||[]).map((x,i)=>({t:x.snippet.title,a:x.snippet.channelTitle,src:'YT Music',m:i%12})));
+const pl=await j('https://www.googleapis.com/youtube/v3/playlists?part=snippet&mine=true&maxResults=10');
+for(const p of pl.items||[]){const it=await j('https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=30&playlistId='+p.id);S.pls=S.pls.filter(z=>z.id!=p.id);S.pls.push({id:p.id,name:p.snippet.title,src:'YT Music',items:(it.items||[]).map((x,k)=>({t:x.snippet.title,a:x.snippet.videoOwnerChannelTitle||'',m:k%12}))})}save()}
+(async()=>{const c=new URLSearchParams(location.search).get('code'),h=new URLSearchParams(location.hash.slice(1)).get('access_token');
+try{if(c)await spotDone(c);if(h)await ytDone(h)}catch(e){console.log(e)}if(c||h)history.replaceState({},'',CFG.redirect);render()})();
+if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
+document.onkeydown=e=>{if(e.key==' '&&e.target==document.body){e.preventDefault();tg()}if(e.key=='ArrowRight')pv(1);if(e.key=='ArrowLeft')pv(-1)}; // TV remote / keyboard
+</script></body></html>
